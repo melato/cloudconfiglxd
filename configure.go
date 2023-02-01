@@ -100,6 +100,16 @@ func (t *Configurer) Apply(config *cloudinit.Config) error {
 			return err
 		}
 	}
+	if config.Timezone != "" {
+		if t.OS == nil {
+			return requireOSError("cannot set timezone")
+		}
+		command := t.OS.SetTimezoneCommand(config.Timezone)
+		err := t.RunCommands([]cloudinit.Command{cloudinit.Command(command)})
+		if err != nil {
+			return err
+		}
+	}
 	err = t.RunCommands(config.Runcmd)
 	if err != nil {
 		return err
