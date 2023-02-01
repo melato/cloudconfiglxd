@@ -27,7 +27,7 @@ func (t *App) Configured() error {
 }
 
 func (t *App) Apply(files ...string) error {
-	configurer := NewConfigurer(t.server)
+	configurer := NewConfigurer(t.server, t.Instance)
 	configurer.Log = os.Stdout
-	return configurer.ApplyConfigFiles(t.Instance, files...)
+	return configurer.ApplyConfigFiles(files...)
 }

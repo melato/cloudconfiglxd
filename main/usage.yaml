@@ -9,6 +9,6 @@ commands:
   version:
     short: print version
   apply:
-    use: [-i <instance>] <config-file.yaml>...
+    use: "[-i <instance>] <config-file.yaml>..."
     short: apply cloud-init files to an instance
 
