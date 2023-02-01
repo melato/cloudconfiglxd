@@ -1,0 +1,14 @@
+short: applies cloud-init configuration to LXD instances
+long: |
+  configures LXD instances (containers, VMs), by
+  applying cloud-init config files, using the LXD API.
+use: "[options] args"
+examples:
+- apply -i <instance> <config-file.yaml>
+commands:
+  version:
+    short: print version
+  apply:
+    use: [-i <instance>] <config-file.yaml>...
+    short: apply cloud-init files to an instance
+
