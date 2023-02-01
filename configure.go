@@ -19,8 +19,9 @@ var Trace bool
 
 type Configurer struct {
 	Server      lxd.InstanceServer
-	instance    string
+	OS          cloudinit.OS
 	Log         io.Writer
+	instance    string
 	createdDirs map[string]struct{}
 }
 
@@ -89,13 +90,17 @@ func (t *Configurer) WriteFile(f *cloudinit.File) error {
 }
 
 func (t *Configurer) Apply(config *cloudinit.Config) error {
+	err := t.InstallPackages(config.Packages)
+	if err != nil {
+		return err
+	}
 	for _, f := range config.Files {
 		err := t.WriteFile(f)
 		if err != nil {
 			return err
 		}
 	}
-	err := t.RunCommands(config.Runcmd)
+	err = t.RunCommands(config.Runcmd)
 	if err != nil {
 		return err
 	}
@@ -202,4 +207,22 @@ func (t *Configurer) exec(input string, execArgs ...string) error {
 		return lxdutil.AnnotateLXDError(t.instance, err)
 	}
 	return nil
+}
+
+func (t *Configurer) InstallPackages(packages []string) error {
+	if len(packages) == 0 {
+		return nil
+	}
+	if t.OS == nil {
+		return requireOSError("cannot install packages")
+	}
+	commands := make([]cloudinit.Command, 0, len(packages))
+	for _, pkg := range packages {
+		commands = append(commands, t.OS.InstallPackageCommand(pkg))
+	}
+	return t.RunCommands(commands)
+}
+
+func requireOSError(msg string) error {
+	return fmt.Errorf("%s.  Missing OS", msg)
 }
