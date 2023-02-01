@@ -31,9 +31,9 @@ func (t *Configurer) log(format string, args ...any) {
 
 func (t *Configurer) WriteFile(instance string, f *cloudinit.File) error {
 	t.log("write file: %s\n", f.Path)
-	var args lxd.ContainerFileArgs
+	var args lxd.InstanceFileArgs
 	args.Content = strings.NewReader(f.Content)
-	err := t.Server.CreateContainerFile(instance, f.Path, args)
+	err := t.Server.CreateInstanceFile(instance, f.Path, args)
 	if err != nil {
 		return lxdutil.AnnotateLXDError(f.Path, err)
 	}
