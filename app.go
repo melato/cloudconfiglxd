@@ -14,7 +14,7 @@ type App struct {
 	lxdutil.LxdClient
 	Instance string `name:"i" usage:"LXD instance to configure"`
 	OS       string `name:"ostype" usage:"OS type"`
-	os       cloudinit.OS
+	os       cloudinit.OSType
 	server   lxd.InstanceServer
 }
 
@@ -40,7 +40,9 @@ func (t *App) Configured() error {
 }
 
 func (t *App) Apply(files ...string) error {
-	configurer := NewConfigurer(t.server, t.Instance)
+	base := NewInstanceConfigurer(t.server, t.Instance)
+	base.Log = os.Stdout
+	configurer := cloudinit.NewConfigurer(base)
 	configurer.OS = t.os
 	configurer.Log = os.Stdout
 	return configurer.ApplyConfigFiles(files...)
