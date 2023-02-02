@@ -1,4 +1,4 @@
-module melato.org/lxdcloudinit
+module melato.org/cloudinitlxd
 
 go 1.19
 

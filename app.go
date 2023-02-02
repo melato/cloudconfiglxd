@@ -1,4 +1,4 @@
-package lxdcloudinit
+package cloudinitlxd
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	lxd "github.com/lxc/lxd/client"
 	"melato.org/cloudinit"
 	"melato.org/cloudinit/ostype"
-	"melato.org/lxdcloudinit/lxdutil"
+	"melato.org/cloudinitlxd/lxdutil"
 )
 
 type App struct {

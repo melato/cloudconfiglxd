@@ -4,9 +4,9 @@ import (
 	_ "embed"
 	"fmt"
 
+	"melato.org/cloudinitlxd"
 	"melato.org/command"
 	"melato.org/command/usage"
-	"melato.org/lxdcloudinit"
 )
 
 //go:embed version
@@ -17,7 +17,7 @@ var usageData []byte
 
 func main() {
 	cmd := &command.SimpleCommand{}
-	var app lxdcloudinit.App
+	var app cloudinitlxd.App
 	cmd.Command("apply").Flags(&app).RunFunc(app.Apply)
 	cmd.Command("version").RunFunc(func() { fmt.Println(version) })
 

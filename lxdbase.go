@@ -1,4 +1,4 @@
-package lxdcloudinit
+package cloudinitlxd
 
 import (
 	"bytes"
@@ -11,7 +11,7 @@ import (
 
 	lxd "github.com/lxc/lxd/client"
 	"github.com/lxc/lxd/shared/api"
-	"melato.org/lxdcloudinit/lxdutil"
+	"melato.org/cloudinitlxd/lxdutil"
 )
 
 type InstanceConfigurer struct {
