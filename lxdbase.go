@@ -43,16 +43,6 @@ func (t *InstanceConfigurer) exec(input string, execArgs ...string) error {
 	if len(execArgs) == 0 {
 		return fmt.Errorf("empty command")
 	}
-	if t.Log != nil {
-		var suffix string
-		if input != "" {
-			suffix = " << ---"
-		}
-		fmt.Printf("%s%s\n", strings.Join(execArgs, " "), suffix)
-		if input != "" {
-			fmt.Printf("%s\n---\n", input)
-		}
-	}
 	var post api.InstanceExecPost
 	post.Command = execArgs
 	post.WaitForWS = true
@@ -99,19 +89,34 @@ func (t *InstanceConfigurer) ensureDirExists(dir string) error {
 	return nil
 }
 
-func (t *InstanceConfigurer) WriteFile(path string, data []byte, perm fs.FileMode) error {
+func (t *InstanceConfigurer) writeOrAppendFile(path string, data []byte, perm fs.FileMode, writeMode string) error {
 	var args lxd.InstanceFileArgs
+	args.Mode = int(perm)
+	args.WriteMode = writeMode
+	args.Content = bytes.NewReader(data)
+	err := t.Server.CreateInstanceFile(t.instance, path, args)
+	if err != nil {
+		return lxdutil.AnnotateLXDError(path, err)
+	}
+	return nil
+}
+
+func (t *InstanceConfigurer) WriteFile(path string, data []byte, perm fs.FileMode) error {
 	dir := filepath.Dir(path)
 	err := t.ensureDirExists(dir)
 	if err != nil {
 		return err
 	}
-	args.Content = bytes.NewReader(data)
-	err = t.Server.CreateInstanceFile(t.instance, path, args)
-	if err != nil {
-		return lxdutil.AnnotateLXDError(path, err)
-	}
-	return nil
+	return t.writeOrAppendFile(path, data, perm, "overwrite")
+}
+
+// AppendFile appends to an existing file
+// The file must already exist
+// If we want to make append work with a new file,
+// we would have to make more calls to touch the file first.
+// Need to check what cloud-init does
+func (t *InstanceConfigurer) AppendFile(path string, data []byte, perm fs.FileMode) error {
+	return t.writeOrAppendFile(path, data, perm, "append")
 }
 
 // NopWriteCloser returns a WriteCloser with a no-op Close method wrapping
