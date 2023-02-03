@@ -11,7 +11,6 @@ import (
 
 	lxd "github.com/lxc/lxd/client"
 	"github.com/lxc/lxd/shared/api"
-	"melato.org/cloudinitlxd/lxdutil"
 )
 
 type InstanceConfigurer struct {
@@ -62,11 +61,11 @@ func (t *InstanceConfigurer) exec(input string, execArgs ...string) error {
 	}
 	op, err := t.Server.ExecInstance(t.instance, post, &args)
 	if err != nil {
-		return lxdutil.AnnotateLXDError(t.instance, err)
+		return fmt.Errorf("%s: %w", t.instance, err)
 	}
 	err = op.Wait()
 	if err != nil {
-		return lxdutil.AnnotateLXDError(t.instance, err)
+		return fmt.Errorf("%s: %w", t.instance, err)
 	}
 	return nil
 }
@@ -96,7 +95,7 @@ func (t *InstanceConfigurer) writeOrAppendFile(path string, data []byte, perm fs
 	args.Content = bytes.NewReader(data)
 	err := t.Server.CreateInstanceFile(t.instance, path, args)
 	if err != nil {
-		return lxdutil.AnnotateLXDError(path, err)
+		return fmt.Errorf("%s: %w", path, err)
 	}
 	return nil
 }

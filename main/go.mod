@@ -1,17 +1,18 @@
-module melato.org/cloudinitlxd
+module main
 
 go 1.19
 
 replace (
-	melato.org/cloudinit => ../cloudinit
-	melato.org/lxdclient => ../lxdclient
-	melato.org/yaml => ../yaml
+	melato.org/cloudinit => ../../cloudinit
+	melato.org/cloudinitlxd => ../
+	melato.org/command => ../../command
+	melato.org/lxdclient => ../../lxdclient
+	melato.org/yaml => ../../yaml
 )
 
 require (
-	github.com/lxc/lxd v0.0.0-20230203092445-70b38dec97c2
-	melato.org/cloudinit v0.0.0-00010101000000-000000000000
-	melato.org/lxdclient v0.0.0-00010101000000-000000000000
+	melato.org/cloudinitlxd v0.0.0-00010101000000-000000000000
+	melato.org/command v0.0.0-00010101000000-000000000000
 )
 
 require (
@@ -28,6 +29,7 @@ require (
 	github.com/julienschmidt/httprouter v1.3.0 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
 	github.com/kr/fs v0.1.0 // indirect
+	github.com/lxc/lxd v0.0.0-20230203092445-70b38dec97c2 // indirect
 	github.com/pborman/uuid v1.2.1 // indirect
 	github.com/pkg/sftp v1.13.5 // indirect
 	github.com/pkg/xattr v0.4.9 // indirect
@@ -46,5 +48,7 @@ require (
 	gopkg.in/retry.v1 v1.0.3 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+	melato.org/cloudinit v0.0.0-00010101000000-000000000000 // indirect
+	melato.org/lxdclient v0.0.0-00010101000000-000000000000 // indirect
 	melato.org/yaml v0.0.0-00010101000000-000000000000 // indirect
 )

@@ -7,11 +7,11 @@ import (
 	lxd "github.com/lxc/lxd/client"
 	"melato.org/cloudinit"
 	"melato.org/cloudinit/ostype"
-	"melato.org/cloudinitlxd/lxdutil"
+	"melato.org/lxdclient"
 )
 
 type App struct {
-	lxdutil.LxdClient
+	lxdclient.LxdClient
 	Instance string `name:"i" usage:"LXD instance to configure"`
 	OS       string `name:"ostype" usage:"OS type"`
 	os       cloudinit.OSType
