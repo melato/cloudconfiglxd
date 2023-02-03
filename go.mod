@@ -4,15 +4,10 @@ go 1.19
 
 replace (
 	melato.org/cloudinit => ../cloudinit
-	melato.org/lxdclient => ../lxdclient
 	melato.org/yaml => ../yaml
 )
 
-require (
-	github.com/lxc/lxd v0.0.0-20230203092445-70b38dec97c2
-	melato.org/cloudinit v0.0.0-00010101000000-000000000000
-	melato.org/lxdclient v0.0.0-00010101000000-000000000000
-)
+require github.com/lxc/lxd v0.0.0-20230203092445-70b38dec97c2
 
 require (
 	github.com/flosch/pongo2 v0.0.0-20200913210552-0d938eb266f3 // indirect
@@ -21,9 +16,6 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
-	github.com/juju/go4 v0.0.0-20160222163258-40d72ab9641a // indirect
-	github.com/juju/persistent-cookiejar v1.0.0 // indirect
-	github.com/juju/schema v1.0.1 // indirect
 	github.com/juju/webbrowser v1.0.0 // indirect
 	github.com/julienschmidt/httprouter v1.3.0 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
@@ -41,10 +33,6 @@ require (
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/errgo.v1 v1.0.1 // indirect
 	gopkg.in/httprequest.v1 v1.2.1 // indirect
-	gopkg.in/juju/environschema.v1 v1.0.1 // indirect
 	gopkg.in/macaroon.v2 v2.1.0 // indirect
-	gopkg.in/retry.v1 v1.0.3 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
-	melato.org/yaml v0.0.0-00010101000000-000000000000 // indirect
 )
