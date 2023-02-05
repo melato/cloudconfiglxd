@@ -1,9 +1,9 @@
-module melato.org/cloudinitlxd
+module melato.org/cloudconfiglxd
 
 go 1.19
 
 replace (
-	melato.org/cloudinit => ../cloudinit
+	melato.org/cloudconfig => ../cloudconfig
 	melato.org/yaml => ../yaml
 )
 

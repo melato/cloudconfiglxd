@@ -3,8 +3,8 @@ module main
 go 1.19
 
 replace (
-	melato.org/cloudinit => ../../cloudinit
-	melato.org/cloudinitlxd => ../
+	melato.org/cloudconfig => ../../cloudconfig
+	melato.org/cloudconfiglxd => ../
 	melato.org/command => ../../command
 	melato.org/lxdclient => ../../lxdclient
 	melato.org/yaml => ../../yaml
@@ -12,8 +12,8 @@ replace (
 
 require (
 	github.com/lxc/lxd v0.0.0-20230203092445-70b38dec97c2
-	melato.org/cloudinit v0.0.0-00010101000000-000000000000
-	melato.org/cloudinitlxd v0.0.0-00010101000000-000000000000
+	melato.org/cloudconfig v0.0.0-00010101000000-000000000000
+	melato.org/cloudconfiglxd v0.0.0-00010101000000-000000000000
 	melato.org/command v0.0.0-00010101000000-000000000000
 	melato.org/lxdclient v0.0.0-00010101000000-000000000000
 )

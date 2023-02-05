@@ -1,4 +1,4 @@
-package cloudinitlxd
+package cloudconfiglxd
 
 import (
 	"bytes"
@@ -38,6 +38,26 @@ func (t *InstanceConfigurer) RunCommand(args ...string) error {
 
 }
 
+func exitCode(serverOp lxd.Operation) (int, error) {
+	op := serverOp.Get()
+	/*
+		data, _ := json.MarshalIndent(op, "", " ")
+		os.Stdout.Write(data)
+	*/
+	returnValue := op.Metadata["return"]
+	if returnValue == nil {
+		return 1, fmt.Errorf("missing return code")
+	}
+	switch code := returnValue.(type) {
+	case float64:
+		return int(code), nil
+	case int:
+		return code, nil
+	default:
+		return 1, fmt.Errorf("unexpected return type: %T", returnValue)
+	}
+}
+
 func (t *InstanceConfigurer) exec(input string, execArgs ...string) error {
 	if len(execArgs) == 0 {
 		return fmt.Errorf("empty command")
@@ -66,6 +86,13 @@ func (t *InstanceConfigurer) exec(input string, execArgs ...string) error {
 	err = op.Wait()
 	if err != nil {
 		return fmt.Errorf("%s: %w", t.instance, err)
+	}
+	exitCode, err := exitCode(op)
+	if err != nil {
+		return err
+	}
+	if exitCode != 0 {
+		return fmt.Errorf("exit code: %d", exitCode)
 	}
 	return nil
 }

@@ -6,9 +6,9 @@ import (
 	"os"
 
 	lxd "github.com/lxc/lxd/client"
-	"melato.org/cloudinit"
-	"melato.org/cloudinit/ostype"
-	"melato.org/cloudinitlxd"
+	"melato.org/cloudconfig"
+	"melato.org/cloudconfig/ostype"
+	"melato.org/cloudconfiglxd"
 	"melato.org/command"
 	"melato.org/command/usage"
 	"melato.org/lxdclient"
@@ -24,7 +24,7 @@ type App struct {
 	lxdclient.LxdClient
 	Instance string `name:"i" usage:"LXD instance to configure"`
 	OS       string `name:"ostype" usage:"OS type"`
-	os       cloudinit.OSType
+	os       cloudconfig.OSType
 	server   lxd.InstanceServer
 }
 
@@ -50,9 +50,9 @@ func (t *App) Configured() error {
 }
 
 func (t *App) Apply(files ...string) error {
-	base := cloudinitlxd.NewInstanceConfigurer(t.server, t.Instance)
+	base := cloudconfiglxd.NewInstanceConfigurer(t.server, t.Instance)
 	base.Log = os.Stdout
-	configurer := cloudinit.NewConfigurer(base)
+	configurer := cloudconfig.NewConfigurer(base)
 	configurer.OS = t.os
 	configurer.Log = os.Stdout
 	return configurer.ApplyConfigFiles(files...)
