@@ -38,6 +38,28 @@ func (t *InstanceConfigurer) RunCommand(args ...string) error {
 
 }
 
+func (t *InstanceConfigurer) FileExists(file string) (bool, error) {
+	reader, _, err := t.Server.GetInstanceFile(t.instance, file)
+	if err != nil {
+		/*
+			fmt.Printf("%v (%T)\n", err, err)
+			switch e := err.(type) {
+			case api.StatusError:
+				fmt.Printf("status: %d\n", e.Status())
+			}
+		*/
+		// The error could be:
+		// 	Not Found
+		// 	Instance not found
+		//  ... and possibly others if the communication with the LXD server fails
+		// Rather than trying to distinguish between different types of errors,
+		// return that the file does not exist.
+		return false, nil
+	}
+	reader.Close()
+	return true, nil
+}
+
 func exitCode(serverOp lxd.Operation) (int, error) {
 	op := serverOp.Get()
 	/*
