@@ -49,19 +49,35 @@ func (t *App) Configured() error {
 	return nil
 }
 
-func (t *App) Apply(files ...string) error {
+func (t *App) Apply(configFiles ...string) error {
 	base := cloudconfiglxd.NewInstanceConfigurer(t.server, t.Instance)
 	base.Log = os.Stdout
 	configurer := cloudconfig.NewConfigurer(base)
 	configurer.OS = t.os
 	configurer.Log = os.Stdout
-	return configurer.ApplyConfigFiles(files...)
+	if len(configFiles) == 1 && configFiles[0] == "-" {
+		return configurer.ApplyStdin()
+	} else {
+		return configurer.ApplyConfigFiles(configFiles...)
+	}
+}
+
+func (t *App) FileExists(path string) error {
+	base := cloudconfiglxd.NewInstanceConfigurer(t.server, t.Instance)
+	base.Log = os.Stdout
+	exists, err := base.FileExists(path)
+	if err != nil {
+		return err
+	}
+	fmt.Printf("%s: %v\n", path, exists)
+	return nil
 }
 
 func main() {
 	cmd := &command.SimpleCommand{}
 	var app App
 	cmd.Command("apply").Flags(&app).RunFunc(app.Apply)
+	cmd.Command("file-exists").Flags(&app).RunFunc(app.FileExists)
 	cmd.Command("version").RunFunc(func() { fmt.Println(version) })
 
 	usage.Apply(cmd, usageData)
