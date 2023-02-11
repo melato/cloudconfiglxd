@@ -7,7 +7,6 @@ replace (
 	melato.org/cloudconfiglxd => ../
 	melato.org/command => ../../command
 	melato.org/lxdclient => ../../lxdclient
-	melato.org/yaml => ../../yaml
 )
 
 require (
@@ -50,5 +49,4 @@ require (
 	gopkg.in/retry.v1 v1.0.3 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	melato.org/yaml v0.0.0-00010101000000-000000000000 // indirect
 )
