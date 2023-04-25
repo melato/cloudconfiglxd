@@ -2,8 +2,6 @@ module melato.org/cloudconfiglxd
 
 go 1.19
 
-replace melato.org/cloudconfig => ../cloudconfig
-
 require github.com/lxc/lxd v0.0.0-20230203092445-70b38dec97c2
 
 require (

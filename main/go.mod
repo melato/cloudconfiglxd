@@ -2,19 +2,14 @@ module main
 
 go 1.19
 
-replace (
-	melato.org/cloudconfig => ../../cloudconfig
-	melato.org/cloudconfiglxd => ../
-	melato.org/command => ../../command
-	melato.org/lxdclient => ../../lxdclient
-)
+replace melato.org/cloudconfiglxd => ../
 
 require (
 	github.com/lxc/lxd v0.0.0-20230203092445-70b38dec97c2
-	melato.org/cloudconfig v0.0.0-00010101000000-000000000000
+	melato.org/cloudconfig v0.0.0-20230211145042-0e3439c6008c
 	melato.org/cloudconfiglxd v0.0.0-00010101000000-000000000000
-	melato.org/command v0.0.0-00010101000000-000000000000
-	melato.org/lxdclient v0.0.0-00010101000000-000000000000
+	melato.org/command v1.0.1
+	melato.org/lxdclient v0.0.0-20230211145817-cfdb418e85ed
 )
 
 require (
@@ -48,5 +43,4 @@ require (
 	gopkg.in/macaroon.v2 v2.1.0 // indirect
 	gopkg.in/retry.v1 v1.0.3 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
