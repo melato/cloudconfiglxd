@@ -33,5 +33,5 @@ Supported ostypes are: alpine, debian.  Others can be added.
 ```
 cd main
 date > version
-go install cloudconfig-lxd 
+go install cloudconfig-lxd.go
 ```
