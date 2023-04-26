@@ -3,11 +3,10 @@ applying cloud-init config files, using the LXD API.
 
 It does not require that the guest OS has cloud-init installed.
 
-It can be used as a library or as an executable.
-
+It can be used as a Go library or as an executable.
 
 # Supported cloud-init features
-The following fields of cloud-config files are supported and applied in this order:
+The following cloud-init modules (sections) are supported and applied in this order:
 
 - packages
 - write_files (only plain text, without any encoding)
@@ -15,12 +14,24 @@ The following fields of cloud-config files are supported and applied in this ord
 - runcmd
 
 # Standalone executable
-- cloudconfig-lxd will connect to the LXD server, using
+cloudconfig-lxd will connect to the LXD server
+using either the UNIX socket or HTTPS.
+For HTTPS, it uses configuration information found in the lxc user configuration files,
+in ~/snap/lxd/common/config/
 
+# Usage
+```
+cloudconfig-lxd apply [-ostype <ostype>] -i <instance> <cloud-config-file>...
+```
+ostype is needed to for packages and users, since different distributions have
+different package systems and may have differences in how they create users.
+
+Supported ostypes are: alpine, debian.  Others can be added.
+  
 # compile
 
 ```
 cd main
 date > version
-go build cloudconfig-lxd 
+go install cloudconfig-lxd 
 ```
