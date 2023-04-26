@@ -14,6 +14,9 @@ The following fields of cloud-config files are supported and applied in this ord
 - users
 - runcmd
 
+# Standalone executable
+- cloudconfig-lxd will connect to the LXD server, using
+
 # compile
 
 ```

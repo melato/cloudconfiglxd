@@ -9,7 +9,6 @@ require (
 	melato.org/cloudconfig v0.0.0-20230211145042-0e3439c6008c
 	melato.org/cloudconfiglxd v0.0.0-00010101000000-000000000000
 	melato.org/command v1.0.1
-	melato.org/lxdclient v0.0.0-20230211145817-cfdb418e85ed
 )
 
 require (

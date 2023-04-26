@@ -200,5 +200,3 @@ melato.org/cloudconfig v0.0.0-20230211145042-0e3439c6008c h1:M5FAkjzIT0QBY0T87+6
 melato.org/cloudconfig v0.0.0-20230211145042-0e3439c6008c/go.mod h1:McnpS5JJEheQbkSijEwNWJRgE1bVSlfcAyR2HqUCsXk=
 melato.org/command v1.0.1 h1:wum5goU7oW3B/0xF4Z4sQ7tugy/qQklek2MSpQmFo5I=
 melato.org/command v1.0.1/go.mod h1:1f8kdvW0OvX8TOUr4M7Wyad2geJMfBGbs+bN3sBx3eg=
-melato.org/lxdclient v0.0.0-20230211145817-cfdb418e85ed h1:IQ3HcIvnau4qwCF8DKy+X24XTDnOitGlRQKbeD/c/u4=
-melato.org/lxdclient v0.0.0-20230211145817-cfdb418e85ed/go.mod h1:I3CSykkN0MDUCCnAX5mEM2RkRgzE1cz6KPXTBlkRrnQ=
