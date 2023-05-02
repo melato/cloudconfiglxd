@@ -9,9 +9,9 @@ import (
 	"melato.org/cloudconfig"
 	"melato.org/cloudconfig/ostype"
 	"melato.org/cloudconfiglxd"
-	"melato.org/cloudconfiglxd/lxdclient"
 	"melato.org/command"
 	"melato.org/command/usage"
+	"melato.org/lxdclient"
 )
 
 //go:embed version
@@ -31,6 +31,10 @@ type App struct {
 func (t *App) Configured() error {
 	if t.Instance == "" {
 		return fmt.Errorf("missing instance")
+	}
+	err := t.LxdClient.Configured()
+	if err != nil {
+		return err
 	}
 	server, err := t.CurrentServer()
 	if err != nil {
