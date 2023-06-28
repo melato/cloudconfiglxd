@@ -4,6 +4,8 @@ go 1.19
 
 replace melato.org/cloudconfiglxd => ../
 
+replace melato.org/lxdclient => ../../lxdclient
+
 require (
 	github.com/lxc/lxd v0.0.0-20230526000706-c0b7d6b0c8cc
 	melato.org/cloudconfig v0.0.0-20230426173728-bf10961073ff
