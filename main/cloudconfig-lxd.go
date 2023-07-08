@@ -9,9 +9,9 @@ import (
 	"melato.org/cloudconfig"
 	"melato.org/cloudconfig/ostype"
 	"melato.org/cloudconfiglxd"
+	"melato.org/cloudconfiglxd/lxdclient"
 	"melato.org/command"
 	"melato.org/command/usage"
-	"melato.org/lxdclient"
 )
 
 //go:embed version
