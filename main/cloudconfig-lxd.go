@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	lxd "github.com/lxc/lxd/client"
+	lxd "github.com/canonical/lxd/client"
 	"melato.org/cloudconfig"
 	"melato.org/cloudconfig/ostype"
 	"melato.org/cloudconfiglxd"
