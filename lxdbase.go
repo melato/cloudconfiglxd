@@ -28,6 +28,10 @@ func NewInstanceConfigurer(server lxd.InstanceServer, instance string) *Instance
 	return t
 }
 
+func (t *InstanceConfigurer) SetLogWriter(w io.Writer) {
+	t.Log = w
+}
+
 func (t *InstanceConfigurer) RunScript(script string) error {
 	return t.exec(script, "/bin/sh")
 
