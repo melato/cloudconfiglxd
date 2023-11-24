@@ -14,7 +14,6 @@ import (
 	"melato.org/command/usage"
 )
 
-//go:embed version
 var version string
 
 //go:embed usage.yaml
